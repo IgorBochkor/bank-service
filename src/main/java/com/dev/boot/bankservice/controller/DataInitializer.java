@@ -34,6 +34,6 @@ public class DataInitializer {
         userAdmin.setPassword("123456");
         userAdmin.setDateOfBirth(LocalDate.of(1990,10,10));
         userAdmin.setRoles(Set.of(roleAdmin, roleUser));
-        userService.create(userAdmin);
+        userService.save(userAdmin);
     }
 }
