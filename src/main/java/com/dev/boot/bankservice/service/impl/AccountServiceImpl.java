@@ -18,12 +18,12 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<Account> getByPhoneNumber(String phoneNumber) {
+    public List<Account> getAllByPhoneNumber(String phoneNumber) {
         return accountRepository.getByUserPhoneNumber(phoneNumber);
     }
 
     @Override
-    public Account getAllByAccountNumber(String accountNumber) {
+    public Account getByAccountNumber(String accountNumber) {
         return accountRepository.findByAccountNumber(accountNumber).get();
     }
 }

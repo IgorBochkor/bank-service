@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -26,5 +27,6 @@ public class Account {
     private BigDecimal balance;
     private boolean isActive;
     @ManyToOne
+    @ToString.Exclude
     private User user;
 }

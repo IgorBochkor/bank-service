@@ -6,7 +6,7 @@ import java.util.List;
 public interface AccountService {
     void save(Account account);
 
-    List<Account> getByPhoneNumber(String phoneNumber);
+    List<Account> getAllByPhoneNumber(String phoneNumber);
 
-    Account getAllByAccountNumber(String accountNumber);
+    Account getByAccountNumber(String accountNumber);
 }
