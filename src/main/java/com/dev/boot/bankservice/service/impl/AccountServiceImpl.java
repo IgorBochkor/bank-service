@@ -23,7 +23,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account getByAccountNumber(String accountNumber) {
-        return accountRepository.findAccountByAccountNumber(accountNumber).get();
+    public Account getAllByAccountNumber(String accountNumber) {
+        return accountRepository.findByAccountNumber(accountNumber).get();
     }
 }

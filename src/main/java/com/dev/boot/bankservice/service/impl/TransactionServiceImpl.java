@@ -22,7 +22,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public List<Transaction> getAllByAccount(int page, int size, Account account) {
-        PageRequest pageRequest = PageRequest.of(page,size, Sort.by("date")
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by("date")
                 .descending().and(Sort.by("id")));
         return transactionRepository.getAllByAccount(account,pageRequest);
     }
@@ -37,7 +37,7 @@ public class TransactionServiceImpl implements TransactionService {
         transactionFromAccount.setDateTime(LocalDateTime.now());
         transactionFromAccount.setTypeOperation(Transaction.TypeOperation.OUTCOMING);
         transactionRepository.save(transactionFromAccount);
-        fromAccount.setBalance(fromAccount.getBalance().subtract(toAccount.getBalance()));
+        fromAccount.setBalance(fromAccount.getBalance().subtract(amount));
         if (fromAccount.getBalance().compareTo(BigDecimal.ZERO) < 0) {
             throw new RuntimeException("Not enough money on account " + fromAccount);
         }
@@ -50,7 +50,7 @@ public class TransactionServiceImpl implements TransactionService {
         transactionToAccount.setDateTime(LocalDateTime.now());
         transactionToAccount.setTypeOperation(Transaction.TypeOperation.INCOMING);
         transactionRepository.save(transactionToAccount);
-        toAccount.setBalance(toAccount.getBalance().add(transactionFromAccount.getAmount()));
+        toAccount.setBalance(toAccount.getBalance().add(amount));
         accountService.save(toAccount);
     }
 }

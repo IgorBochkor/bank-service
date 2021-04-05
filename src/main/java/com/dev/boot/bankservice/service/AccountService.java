@@ -8,5 +8,5 @@ public interface AccountService {
 
     List<Account> getByPhoneNumber(String phoneNumber);
 
-    Account getByAccountNumber(String accountNumber);
+    Account getAllByAccountNumber(String accountNumber);
 }
