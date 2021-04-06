@@ -5,7 +5,7 @@ import com.dev.boot.bankservice.model.Transaction;
 import com.dev.boot.bankservice.repository.TransactionRepository;
 import com.dev.boot.bankservice.service.AccountService;
 import com.dev.boot.bankservice.service.TransactionService;
-import com.dev.boot.bankservice.service.util.ClientService;
+import com.dev.boot.bankservice.service.util.ClientServiceExchangeRate;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class TransactionServiceImpl implements TransactionService {
     private final TransactionRepository transactionRepository;
     private final AccountService accountService;
-    private final ClientService clientService;
+    private final ClientServiceExchangeRate clientServiceExchangeRate;
 
     @Override
     public List<Transaction> getAllByAccount(int page, int size, Account account) {
@@ -52,7 +52,7 @@ public class TransactionServiceImpl implements TransactionService {
         transactionToAccount.setDateTime(LocalDateTime.now());
         transactionToAccount.setTypeOperation(Transaction.TypeOperation.INCOMING);
         if (fromAccount.getCurrency() != toAccount.getCurrency()) {
-            BigDecimal rate = clientService.getRate(LocalDate.now(),
+            BigDecimal rate = clientServiceExchangeRate.getRate(LocalDate.now(),
                     fromAccount.getCurrency(), toAccount.getCurrency());
             amount = amount.multiply(rate);
         }

@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ClientService {
+public class ClientServiceExchangeRate {
     @Value(value = "$(service.url)")
     private String url;
     private final HttpClient httpClient;
 
-    public ClientService(HttpClient httpClient) {
+    public ClientServiceExchangeRate(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
